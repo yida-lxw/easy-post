@@ -5,11 +5,18 @@ import shutil
 
 from core.utils.string_utils import StringUtils
 
-
+'''
+@Project  easy-post 
+@File     file_utils.py
+@IDE      PyCharm
+@Author   yida
+@Email    949226420@qq.com
+@Date     2024.12.10 13:52
+@Desc     文件操作工具类
+'''
 class FileUtils:
     @staticmethod
     def copy_file(src_file, dest_file):
-        # os.system(f"cp {src_file} {dest_file}")
         try:
             shutil.copyfile(src_file, dest_file)
             return True
