@@ -5,6 +5,18 @@
 
 Python 3.8+
 
+### 安装项目依赖
+
++ pip
+  > pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
++ conda
+  > conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free <br/>
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ <br/>
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ <br/>
+  conda config --set show_channel_urls yes <br/>
+  (注意:上面4行命令只需执行一次即可)<br/>
+  conda install --yes --file requirements.txt <br/>
+
 ### 模块说明
 
 + core  工具类
