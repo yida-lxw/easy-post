@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import os
+import random
 
-
+'''
+@Project  easy-post 
+@File     string_utils.py
+@IDE      PyCharm
+@Author   yida
+@Email    949226420@qq.com
+@Date     2024.12.10 14:20
+@Desc     字符串操作工具类
+'''
 class StringUtils:
     """
     判断给定字符串是否为空
@@ -122,3 +131,8 @@ class StringUtils:
         if not parent_dir.endswith("/"):
             parent_dir = parent_dir + "/"
         return parent_dir + project_name
+
+    # 生成[start, end]区间内的随机数(双闭区间)
+    @staticmethod
+    def random_num(start, end):
+        return random.randint(start, end)
