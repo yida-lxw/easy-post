@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 import os
 import random
 
@@ -136,3 +137,11 @@ class StringUtils:
     @staticmethod
     def random_num(start, end):
         return random.randint(start, end)
+
+    # 将Python对象格式化为JSON字符串
+    @staticmethod
+    def to_json_str(obj, beautify: bool = False):
+        if beautify:
+            return json.dumps(obj, indent=4)
+        else:
+            return json.dumps(obj)
