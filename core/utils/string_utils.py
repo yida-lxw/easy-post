@@ -125,13 +125,11 @@ class StringUtils:
 
     # 获取当前项目的根路径
     @staticmethod
-    def get_project_basepath(project_name):
-        cur_path = os.path.abspath(os.path.dirname(__file__))
-        cur_path = cur_path.replace("\\", "/")
-        parent_dir = cur_path[:cur_path.find(project_name)]
-        if not parent_dir.endswith("/"):
-            parent_dir = parent_dir + "/"
-        return parent_dir + project_name
+    def get_project_basepath():
+        current_dir = os.getcwd()
+        while not os.path.exists(os.path.join(current_dir, 'requirements.txt')):
+            current_dir = os.path.dirname(current_dir)
+        return current_dir
 
     # 生成[start, end]区间内的随机数(双闭区间)
     @staticmethod
