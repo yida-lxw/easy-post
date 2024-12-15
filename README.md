@@ -21,6 +21,7 @@ Python 3.8+
 
 + core  工具类
 + config  系统配置
++ image-extract  图片链接提取
 + image-upload  图片上传
 + image-amend   图片链接修正
 + html-generate  HTML生成

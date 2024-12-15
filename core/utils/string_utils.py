@@ -143,3 +143,4 @@ class StringUtils:
             return json.dumps(obj, indent=4)
         else:
             return json.dumps(obj)
+
