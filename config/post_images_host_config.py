@@ -1,0 +1,22 @@
+# -*- coding: UTF-8 -*-
+from config.image_host_config import ImageHostConfig
+from config.image_host_type import ImageHostType
+
+'''
+@Project  easy-post 
+@File     PostImagesHostConfig.py
+@IDE      PyCharm 
+@Author   yida
+@Email    949226420@qq.com
+@Date     2024/12/16 17:55 
+@Desc     PostImages图床配置类
+'''
+
+
+class PostImagesHostConfig(ImageHostConfig):
+    def __init__(self, email: str, password: str, gallery_name: str):
+        self.username = email
+        self.password = password
+        self.email = email
+        self.gallery_name = gallery_name
+        self._image_host_type = ImageHostType.POSTIMAGES
