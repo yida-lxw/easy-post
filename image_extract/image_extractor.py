@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from typing import TypeVar, Generic
+from typing import TypeVar
+
 from image_extract_result import ImageExtractResult
 
 '''

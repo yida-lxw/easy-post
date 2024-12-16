@@ -20,8 +20,7 @@ class ImageUploader:
     _image_host_config: C = None
 
     def upload(self, image_file_path: str) -> str:
-        raise NotImplementedError(
-            "This is upload function of ImageUploader interface, it hasn't been implemented yet.")
+        raise NotImplementedError("This is upload function of ImageUploader interface, it hasn't been implemented yet.")
 
     def setImageHostConfig(self, image_host_config: C):
         self._image_host_config = image_host_config

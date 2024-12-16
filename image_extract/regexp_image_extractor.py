@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-from image_extractor import ImageExtractor, T
+
 from image_extract_result import ImageExtractResult
+from image_extractor import ImageExtractor, T
+
 '''
 @Project  easy-post
 @File     regexp_image_extractor.py
@@ -13,12 +15,14 @@ from image_extract_result import ImageExtractResult
 @Desc     使用正则表达式从MD文档中提取出插入的图片链接
 '''
 
+
 class RegExpImageExtractor(ImageExtractor):
     _pattern = '(!\\[(.*?)\\]\\((.*?)\\))'
 
     """
     传入md文档的字符串文本，返回提取到的插入图片链接
     """
+
     def extract(self, md_content: str) -> list[T]:
         matches = re.findall(self._pattern, md_content)
         result_list = []

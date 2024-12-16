@@ -21,13 +21,14 @@ Python 3.8+
 
 + core  工具类
 + config  系统配置
-+ image-extract  图片链接提取
-+ image-upload  图片上传
-+ image-amend   图片链接修正
-+ html-generate  HTML生成
-+ blog-post      博客发送
-+ blog-index    博客索引创建
-+ blog-search   博客内容搜索
++ image_extract 图片链接提取
++ image_upload 图片上传
++ image_amend 图片链接修正
++ html_generate HTML生成
++ blog_post 博客发送
++ blog_index 博客索引创建
++ blog_search 博客内容搜索
++ test 单元测试
 
 ### 开发成员
 
