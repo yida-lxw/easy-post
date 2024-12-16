@@ -118,7 +118,6 @@ class StringUtils:
     """
     数字添加前导字符,使其最终长度达到指定的total_len大小
     """
-
     @staticmethod
     def left_pad_zero(num: int, total_len: int = 5):
         return str(num).zfill(total_len)
