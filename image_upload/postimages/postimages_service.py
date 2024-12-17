@@ -10,8 +10,8 @@ import magic
 import requests
 from bs4 import BeautifulSoup
 
-from headers import PostImagesHeader
-from routes import PostImageRoute
+from image_upload.postimages.headers import PostImagesHeader
+from image_upload.postimages.routes import PostImageRoute
 
 '''
 @Project  easy-post

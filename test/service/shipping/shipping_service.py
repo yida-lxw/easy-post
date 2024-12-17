@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from core.anno.component import Component
+
 '''
 @Project  easy-post 
 @File     shipping_service.py
@@ -10,6 +12,7 @@
 '''
 
 
+@Component
 class ShippingService:
     def ship_order(self, order_id):
         print(f'Shipping order {order_id} through ShippingService.')

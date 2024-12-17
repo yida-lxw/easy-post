@@ -11,9 +11,5 @@
 '''
 
 
-def Component(*args, **kwargs):
-    def outer(cls):
-        print(str(type(cls)))
-        return cls
-
-    return outer
+def Component(cls):
+    return cls

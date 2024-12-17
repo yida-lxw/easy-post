@@ -2,7 +2,7 @@
 
 from typing import TypeVar
 
-from image_extract_result import ImageExtractResult
+from image_extract.image_extract_result import ImageExtractResult
 
 '''
 @Project  easy-post

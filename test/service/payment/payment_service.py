@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from core.anno.component import Component
+
 '''
 @Project  easy-post 
 @File     payment_service.py
@@ -10,6 +12,7 @@
 '''
 
 
+@Component
 class PaymentService:
     def process_payment(self, amount):
         print(f'Processing payment of ${amount} through PaymentService.')

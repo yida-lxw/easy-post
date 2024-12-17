@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from image_host_type import ImageHostType
+from config.image_host_type import ImageHostType
 
 '''
 @Project  easy-post 

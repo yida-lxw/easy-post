@@ -3,6 +3,7 @@
 import json
 import os
 import random
+import re
 
 '''
 @Project  easy-post 
@@ -30,10 +31,29 @@ class StringUtils:
     def is_not_empty(orignal_str: str):
         return not StringUtils.is_empty(orignal_str)
 
+    # 查找指定字符在original_string字符串中最后一次出现的位置
+    @staticmethod
+    def lastIndexOf(original_string: str, substr: str) -> int:
+        if original_string is None or substr is None:
+            raise ValueError("string and substr could not be None.")
+        elif not (isinstance(original_string, str) and isinstance(substr, str)):
+            raise TypeError("string and substr must be str type.")
+        elif not (len(original_string) > 0 and 0 < len(substr) <= len(original_string)):
+            raise TypeError("string and substr value must be non empty, "
+                            "and string's length must more over than substr's length.")
+        last_index = -1
+        idx = 0
+        while True:
+            try:
+                index = original_string.index(substr, idx)
+                last_index = index
+                idx = index + len(substr)
+            except ValueError:
+                return last_index
+
     """
     判断两个字符串是否相等(比较时区分大小写)
     """
-
     @staticmethod
     def equals(str1: str, str2: str):
         if str1 is None and str2 is None:
@@ -148,3 +168,46 @@ class StringUtils:
     def json_to_dict(json_string: str) -> dict:
         dict_data = json.loads(json_string)
         return dict_data
+
+    # 删除py文件中的注释
+    @staticmethod
+    def remove_comments(file_content):
+        # First, find and store string assignments
+        protected_strings = {}
+        counter = 0
+
+        def protect_string_assignments(match):
+            nonlocal counter
+            var_name, string_content = match.groups()
+            key = f'PROTECTED_STRING_{counter}'
+            protected_strings[key] = match.group(0)
+            counter += 1
+            return key
+
+        # Protect strings that are part of assignments
+        protected_content = re.sub(
+            r'([a-zA-Z_][a-zA-Z0-9_]*\s*=\s*)("""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\')',
+            protect_string_assignments,
+            file_content
+        )
+
+        # Remove docstring comments (triple-quoted strings not part of assignments)
+        cleaned_content = re.sub(
+            r'"""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\'',
+            '',
+            protected_content
+        )
+
+        # Remove single-line comments and empty lines
+        lines = []
+        for line in cleaned_content.split('\n'):
+            # Remove inline comments
+            line = re.sub(r'#.*$', '', line)
+            if line.strip():
+                lines.append(line)
+
+        # Restore protected strings
+        final_content = '\n'.join(lines)
+        for key, value in protected_strings.items():
+            final_content = final_content.replace(key, value)
+        return final_content
