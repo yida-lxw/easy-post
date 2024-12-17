@@ -19,6 +19,10 @@ C = TypeVar('C', bound=ImageHostConfig)
 class ImageUploader:
     _image_host_config: C = None
 
+    # 图床登录接口
+    def login(self) -> dict:
+        raise NotImplementedError("This is login function of ImageUploader interface, it hasn't been implemented yet.")
+
     def upload(self, image_file_path: str) -> str:
         raise NotImplementedError("This is upload function of ImageUploader interface, it hasn't been implemented yet.")
 

@@ -14,6 +14,8 @@ from core.utils.string_utils import StringUtils
 @Date     2024.12.10 13:52
 @Desc     文件操作工具类
 '''
+
+
 class FileUtils:
     @staticmethod
     def copy_file(src_file, dest_file):
@@ -115,3 +117,23 @@ class FileUtils:
             return True
         except Exception as e:
             return False
+
+    # 往文本文件中写入字符串内容
+    @staticmethod
+    def write_string_to_file(content_to_write: str, file_path: str, encoding: str = "UTF-8"):
+        with open(file_path, 'w', encoding=encoding) as file:
+            file.write(content_to_write)
+
+    # 读取指定文件并返回字符串
+    @staticmethod
+    def read_file_as_string(file_path: str, encoding: str = "UTF-8") -> str:
+        with open(file_path, 'r', encoding=encoding) as file:
+            content = file.read()
+            return content
+
+    # 读取指定文件并以list[str]形式返回文件中每一行的文本
+    @staticmethod
+    def read_file_as_lines(file_path: str, encoding: str = "UTF-8") -> list[str]:
+        with open(file_path, 'r', encoding=encoding) as file:
+            lines = file.readlines()
+            return lines

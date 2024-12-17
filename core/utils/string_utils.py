@@ -143,3 +143,8 @@ class StringUtils:
         else:
             return json.dumps(obj)
 
+    # JSON字符串转成dict类型
+    @staticmethod
+    def json_to_dict(json_string: str) -> dict:
+        dict_data = json.loads(json_string)
+        return dict_data
