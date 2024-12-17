@@ -1,0 +1,41 @@
+安装依赖
+pip install injector
+
+
+
+from injector import Module, Injector, singleton, inject
+
+# 定义支付服务
+class PaymentService:
+    def process_payment(self, amount):
+        print(f'Processing payment of ${amount} through PaymentService.')
+
+# 定义物流服务
+class ShippingService:
+    def ship_order(self, order_id):
+        print(f'Shipping order {order_id} through ShippingService.')
+
+# 定义依赖注入模块
+class AppModule(Module):
+    def configure(self, binder):
+        # 将 PaymentService 和 ShippingService 注册为单例
+        binder.bind(PaymentService, to=PaymentService, scope=singleton)
+        binder.bind(ShippingService, to=ShippingService, scope=singleton)
+
+# 使用 @inject 装饰器来注入依赖项
+class OrderProcessor:
+    @inject
+    def __init__(self, payment_service: PaymentService, shipping_service: ShippingService):
+        self.payment_service = payment_service
+        self.shipping_service = shipping_service
+
+    def process_order(self, order_id, amount):
+        self.payment_service.process_payment(amount)
+        self.shipping_service.ship_order(order_id)
+
+# 创建注入器并实例化订单处理器
+injector = Injector([AppModule])
+order_processor = injector.get(OrderProcessor)
+
+# 调用方法来处理订单
+order_processor.process_order(order_id=3456, amount=150.0)

@@ -3,3 +3,4 @@ beautifulsoup4==4.12.2
 numpy==1.24.3
 termcolor==2.5.0
 python-magic==0.4.27
+injector==0.22.0
