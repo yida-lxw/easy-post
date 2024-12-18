@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from injector import singleton
+
 from config.image_host_config import ImageHostConfig
 from config.image_host_type import ImageHostType
 
@@ -13,6 +15,7 @@ from config.image_host_type import ImageHostType
 '''
 
 
+@singleton
 class PostImagesHostConfig(ImageHostConfig):
     def __init__(self, email: str, password: str, gallery_name: str):
         self.username = email

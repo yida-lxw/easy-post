@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 import os
 
+from injector import inject, singleton
+
 from config.post_images_host_config import PostImagesHostConfig
 from core.utils.file_utils import FileUtils
 from core.utils.string_utils import StringUtils
@@ -18,17 +20,22 @@ from image_upload.postimages.postimages_service import PostImagesService
 '''
 
 
+@singleton
 class PostImagesUploader(ImageUploader):
     _postimages_service: PostImagesService
     # 存放cookie文件的目录名称
     _cookies_folder_name = "postimages"
 
+    @inject
+    def __init__(self, postimages_service: PostImagesService):
+        self._postimages_service = postimages_service
+
     def login(self) -> dict:
         email = self._image_host_config.username
         password = self._image_host_config.password
-        # TODO 这里后续需要考虑使用单例注入, 避免过多创建实例对象
-        postimages_service = PostImagesService(email, password)
-        cookies = postimages_service.login()
+        self._postimages_service.email = email
+        self._postimages_service.password = password
+        cookies = self._postimages_service.login()
         if cookies is not None and len(cookies) > 0:
             cookies_json = StringUtils.to_json_str(cookies, beautify=True)
             project_basepath = StringUtils.get_project_basepath()
@@ -60,13 +67,12 @@ class PostImagesUploader(ImageUploader):
         email = self._image_host_config.username
         password = self._image_host_config.password
         gallery_name = image_host_config.gallery_name
-        # TODO 这里后续需要考虑使用单例注入, 避免过多创建实例对象
-        if required_relogin:
-            postimages_service = PostImagesService(email, password)
-        else:
-            postimages_service = PostImagesService(email, password, cookies=cookies_dict)
-        postimages_service.set_working_gallery(gallery_name)
-        image_urls = postimages_service.upload_image(image_file_path)
+        self._postimages_service.email = email
+        self._postimages_service.password = password
+        if not required_relogin:
+            self._postimages_service.cookies = cookies_dict
+        self._postimages_service.set_working_gallery(gallery_name)
+        image_urls = self._postimages_service.upload_image(image_file_path)
         if image_urls:
             print(f"Upload image:[{image_file_path}] successfully, the response data was:{image_urls}")
             return image_urls

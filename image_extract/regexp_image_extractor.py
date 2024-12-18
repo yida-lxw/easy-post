@@ -2,6 +2,8 @@
 
 import re
 
+from injector import singleton
+
 from image_extract.image_extract_result import ImageExtractResult
 from image_extract.image_extractor import ImageExtractor, T
 
@@ -16,6 +18,7 @@ from image_extract.image_extractor import ImageExtractor, T
 '''
 
 
+@singleton
 class RegExpImageExtractor(ImageExtractor):
     _pattern = '(!\\[(.*?)\\]\\((.*?)\\))'
 

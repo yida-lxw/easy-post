@@ -39,9 +39,8 @@ class PackageScanUtils:
             for filename in filenames:
                 if not filename.endswith(".py"):
                     continue
-                if filename.endswith(".py"):
-                    if "__init__.py" == filename:
-                        continue
+                if "__init__.py" == filename:
+                    continue
                 file_path = os.path.join(dirpath, filename)
                 file_path = StringUtils.replaceBackSlash(file_path)
                 relative_path = file_path.replace(project_basepath, "").replace(".py", "").replace("/", ".")
