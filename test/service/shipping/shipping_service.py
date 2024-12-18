@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from core.anno.component import Component
+from injector import singleton
 
 '''
 @Project  easy-post 
@@ -12,7 +12,7 @@ from core.anno.component import Component
 '''
 
 
-@Component
+@singleton
 class ShippingService:
     def ship_order(self, order_id):
         print(f'Shipping order {order_id} through ShippingService.')

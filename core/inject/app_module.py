@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from injector import Module, singleton
+from injector import Module, singleton, threadlocal
 
 from core.utils.package_scan_utils import PackageScanUtils
 from core.utils.string_utils import StringUtils
@@ -28,4 +28,4 @@ class AppModule(Module):
             if is_singleton:
                 binder.bind(clazz, to=clazz, scope=singleton)
             else:
-                binder.bind(clazz, to=clazz)
+                binder.bind(clazz, to=clazz, scope=threadlocal)

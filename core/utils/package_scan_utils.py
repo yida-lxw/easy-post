@@ -64,26 +64,20 @@ class PackageScanUtils:
                             prev_line = all_lines[line_index - 1]
                             prev_line = prev_line.strip("\n")
                             if prev_line is not None and len(prev_line) > 0:
-                                if prev_line.startswith("@Component"):
+                                if "@singleton" == prev_line or "@threadlocal" == prev_line:
                                     is_component = True
-                                    if prev_line.startswith("@Component("):
-                                        match = re.search(self.__property_pattern, prev_line)
-                                        if match:
-                                            singleton_val = match.group(1)
-                                            is_singleton = bool(singleton_val)
-                                        else:
-                                            is_singleton = True
-                                    else:
+                                    if "@singleton" == prev_line:
                                         is_singleton = True
+                                    else:
+                                        is_singleton = False
                                 else:
-                                    is_singleton = True
+                                    is_component = False
                         line_index = line_index + 1
                         break
                     line_index = line_index + 1
 
                 if class_name is None or not is_component:
                     continue
-                # print(f"class name:{class_name},relative_path:{relative_path}")
                 import_path_mappings.append({"from": relative_path, "import": class_name, "singleton": is_singleton})
         return import_path_mappings
 
@@ -110,10 +104,6 @@ class PackageScanUtils:
         module = importlib.import_module(module_path)
         cls = getattr(module, class_name)
         return {"class": cls, "singleton": is_singleton}
-        # if is_singleton:
-        #     binder.bind(cls, to=cls, scope=singleton)
-        # else:
-        #     binder.bind(cls, to=cls)
 
 
 if __name__ == '__main__':

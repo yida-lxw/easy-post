@@ -1,7 +1,6 @@
 # -*- coding: UTF-8 -*-
-from injector import inject
+from injector import inject, singleton
 
-from core.anno.component import Component
 from test.service.payment.payment_service import PaymentService
 from test.service.shipping.shipping_service import ShippingService
 
@@ -16,7 +15,7 @@ from test.service.shipping.shipping_service import ShippingService
 '''
 
 
-@Component
+@singleton
 class OrderService:
     @inject
     def __init__(self, payment_service: PaymentService, shipping_service: ShippingService):

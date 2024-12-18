@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from core.anno.component import Component
+from injector import singleton
 
 '''
 @Project  easy-post 
@@ -12,7 +12,7 @@ from core.anno.component import Component
 '''
 
 
-@Component
+@singleton
 class PaymentService:
     def process_payment(self, amount):
         print(f'Processing payment of ${amount} through PaymentService.')
