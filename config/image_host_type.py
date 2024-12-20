@@ -13,5 +13,5 @@ from enum import Enum
 
 
 class ImageHostType(Enum):
-    POSTIMAGES = 1
-    SM_MS = 2
+    POSTIMAGES = {"code": 1, "host_name": "postimages"}
+    SM_MS = {"code": 2, "host_name": "smms"}

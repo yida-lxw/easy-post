@@ -3,7 +3,7 @@ import os
 
 from injector import inject, singleton
 
-from config.post_images_host_config import PostImagesHostConfig
+from config.postimages.postimages_host_config import PostImagesHostConfig
 from core.utils.file_utils import FileUtils
 from core.utils.string_utils import StringUtils
 from image_upload.image_uploader import ImageUploader
@@ -27,7 +27,8 @@ class PostImagesUploader(ImageUploader):
     _cookies_folder_name = "postimages"
 
     @inject
-    def __init__(self, postimages_service: PostImagesService):
+    def __init__(self, postimages_service: PostImagesService, image_host_config: PostImagesHostConfig):
+        self._image_host_config = image_host_config
         self._postimages_service = postimages_service
 
     def login(self) -> dict:
