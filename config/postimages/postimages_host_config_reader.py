@@ -2,7 +2,9 @@
 from injector import singleton
 
 from config.image_host_config_reader import ImageHostConfigReader
+from config.image_host_config_reader import T
 from config.image_host_type import ImageHostType
+from config.postimages.postimages_host_config import PostImagesHostConfig
 from core.utils.file_utils import FileUtils
 from core.utils.string_utils import StringUtils
 
@@ -23,8 +25,8 @@ class PostImagesHostConfigReader(ImageHostConfigReader):
     def __init__(self):
         self._image_host_type = ImageHostType.POSTIMAGES
 
-    def load_config(self) -> dict:
-        config_sub_folder_name = self._image_host_type["host_name"]
+    def load_config(self) -> T:
+        config_sub_folder_name = self._image_host_type.value["host_name"]
         project_basepath = StringUtils.get_project_basepath()
         project_basepath = StringUtils.replaceBackSlash(project_basepath)
         project_basepath = StringUtils.to_ends_with_back_slash(project_basepath)
@@ -34,4 +36,10 @@ class PostImagesHostConfigReader(ImageHostConfigReader):
         if StringUtils.is_empty(config_file_content):
             print(f"the config file:{config_file_path} is empty. please check it out.")
             return {}
-        return StringUtils.json_to_dict(config_file_content)
+        config_dict = StringUtils.json_to_dict(config_file_content)
+        email = config_dict["username"]
+        password = config_dict["password"]
+        gallery_name = config_dict["gallery_name"]
+        postimagesConfig: PostImagesHostConfig = PostImagesHostConfig(email=email, password=password,
+                                                                      gallery_name=gallery_name)
+        return postimagesConfig

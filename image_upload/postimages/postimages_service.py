@@ -25,7 +25,7 @@ from image_upload.postimages.routes import PostImageRoute
 
 
 class PostImagesService:
-    def __init__(self, email: str, password: str, cookies: str = None) -> None:
+    def __init__(self, email: str = None, password: str = None, cookies: str = None) -> None:
         self.email = email
         self.password = password
         self.cookies = cookies
@@ -42,7 +42,7 @@ class PostImagesService:
         return data
 
     def _get_csrf(self) -> str:
-        login_page_response = requests.get(PostImageRoute.login_page, headers=PostImagesHeader.login_page)
+        login_page_response = requests.get(PostImageRoute.login_page, headers=PostImagesHeader.login_page, timeout=5)
         soup = BeautifulSoup(login_page_response.text, "lxml")
         self.csrf = soup.find('input', {'name': 'csrf_hash'}).get('value')
         return self.csrf

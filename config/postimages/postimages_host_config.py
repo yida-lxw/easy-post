@@ -17,7 +17,7 @@ from config.image_host_type import ImageHostType
 
 @singleton
 class PostImagesHostConfig(ImageHostConfig):
-    def __init__(self, email: str, password: str, gallery_name: str):
+    def __init__(self, email: str = None, password: str = None, gallery_name: str = None):
         self.username = email
         self.password = password
         self.email = email
